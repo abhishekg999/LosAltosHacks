@@ -1,20 +1,22 @@
 <!DOCTYPE html>
 <html>
 <style>
-#mydiv {
+#mydiv1 {
   position: absolute;
   z-index: 9;
   background-color: #f1f1f1;
   text-align: center;
   border: 1px solid #d3d3d3;
+  top: 500px;
 }
 
-#mydivheader {
+#mydiv1header {
   padding: 10px;
   cursor: move;
   z-index: 10;
   background-color: #2196F3;
   color: #fff;
+
 }
 
 #mydiv3 {
@@ -23,6 +25,8 @@
   background-color: #f1f1f1;
   text-align: center;
   border: 1px solid #d3d3d3;
+  top: 500px;
+  left: 700px;
 }
 
 #mydiv3header {
@@ -39,6 +43,7 @@
   background-color: #f1f1f1;
   text-align: center;
   border: 1px solid #d3d3d3;
+  left: 700px;
 }
 
 #mydiv2header {
@@ -65,6 +70,38 @@
   color: #fff;
 }
 
+#mydiv5 {
+  position: absolute;
+  z-index: 9;
+  background-color: #f1f1f1;
+  text-align: center;
+  border: 1px solid #d3d3d3;
+}
+
+#mydiv5header {
+  padding: 10px;
+  cursor: move;
+  z-index: 10;
+  background-color: #2196F3;
+  color: #fff;
+}
+
+#mydiv6 {
+  position: absolute;
+  z-index: 9;
+  background-color: #f1f1f1;
+  text-align: center;
+  border: 1px solid #d3d3d3;
+}
+
+#mydiv6header {
+  padding: 10px;
+  cursor: move;
+  z-index: 10;
+  background-color: #2196F3;
+  color: #fff;
+}
+
 div {
   resize: both;
   overflow: auto;
@@ -74,7 +111,10 @@ div {
   position: relative;
   height: 100%;
   width: 100%; 
-
+}
+.element{
+  min-height: 200px;
+  min-width: 300px;
 }
 </style>
 <body>
@@ -83,23 +123,7 @@ div {
 <script src="script.js"></script>
 
 <div id="main">
-  <div id="mydiv3" class="element">
-    <div id="mydiv3header">PhET Simulations</div>
-      <iframe src="https://phet.colorado.edu/en/simulations" width="700" height="400" scrolling="no" allowfullscreen class="site"></iframe>
-    </div>
-  
-
-
-  <div id="mydiv" class="element" style="width: 600px; height: 400px;">
-      <div id="mydivheader">Desmos</div>
-    </div>
-
-
-  <div id="mydiv2" class="element">
-    <div id="mydiv2header">Wikipedia</div>
-    <iframe src="https://wikipedia.org" class="site"></iframe>
-    </div>
-  </div>
+ 
 </div>
 
 <input type="text" name="link" id="link">
@@ -109,7 +133,7 @@ div {
 
 <script>
 function NewFunction(source){
-  var count = 4
+  var count = document.getElementsByClassName("element").length + 1
   // Now create and append to iDiv
   main = document.getElementById("main")
 
@@ -120,7 +144,10 @@ function NewFunction(source){
   newElement.setAttribute("class", "element")
   f.setAttribute("class", "site")
   newElement.id = ("mydiv" + count)
+  newElement.style.width = "600px"
+  newElement.style.height = "400px"
   innerDiv.id = newElement.id + "header"
+
 
   // The variable iDiv is still good... Just append to it.
 
@@ -134,11 +161,7 @@ function NewFunction(source){
 }
 }
 </script>
-<script>
-  var elt = document.getElementById('mydiv');
-  var calculator = Desmos.GraphingCalculator(elt);
-  calculator.setExpression({id:'graph1', latex:'y=x'});
-</script>
+
 
 <script>
 //Make the DIV element draggagle:
@@ -173,4 +196,76 @@ for (x=0; x<stuff.length; x++){
 
 
 </body>
+<body2>
+    <head2>
+    <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+    <link rel="stylesheet" href="style2.css">
+  </head2>
+  <h1 id = "title1"> Tools </h1>
+  <ul>
+    <h2 id = "drag1" draggable = "true" ondragstart="drag(event)"><li><a> Math</a>
+      <ul>
+        <li><a><button onclick="NewFunction('https://www.desmos.com/calculator')">  Desmos Calculator </button></a></li>
+        <li><a><button onclick="NewFunction('https://www.slader.com/')"> Homework Help </a></li>
+      </ul>
+    </li></h2>
+    <br>
+    <br>
+    <br>
+    <h2><li><a>English</a>
+     <ul>
+        <li><a><button onclick="NewFunction('https://owl.purdue.edu/owl/research_and_citation/mla_style/mla_formatting_and_style_guide/mla_works_cited_page_basic_format.html')">MLA Citations</a></li>
+        <li><a>Grammarly</a></li>
+        <li><a>Wikipedia</a></li>
+      </ul>
+    </li></h2>
+    <br>
+    <br>
+    <br>
+    <h2><li><a>Science</a>
+     <ul>
+        <li><a>PhET</a></li>
+        <li><a>Dynamic Periodic Table</a></li>
+      </ul>
+    </li></h2>
+    <br>
+    <br>
+    <br>
+    <h2><li><a>History</a>
+     <ul>
+        <li><a>Desmos</a></li>
+        <li><a>Calculator</a></li>
+        <li><a>Khan</a></li>
+      </ul>
+    </li></h2>
+  </ul>
+<head>
+
+<script>
+function allowDrop(ev) {
+  ev.preventDefault();
+}
+
+function drag(ev) {
+  ev.dataTransfer.setData("text", ev.target.id);
+}
+
+function drop(ev) {
+  ev.preventDefault();
+  var data = ev.dataTransfer.getData("text");
+  ev.target.appendChild(document.getElementsByID(data));
+}
+</script>
+</head>
+<body>
+
+<div id="div1" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+<br>
+
+<script>
+  
+</body>
+</html>
+
+</body2>
 </html>
